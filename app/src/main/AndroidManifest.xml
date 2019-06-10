@@ -130,15 +130,24 @@
             </intent-filter>
         </service>
 
+		<activity android:name=".RemoteControlActivity" />
+		<activity-alias
+				android:exported="true"
+				android:name=".api.DisconnectVPN"
+				android:targetActivity=".RemoteControlActivity" />
+
+		<activity-alias
+				android:exported="true"
+				android:name=".api.ConnectVPN"
+				android:targetActivity=".RemoteControlActivity" />
+
         <activity
-            android:permission="app.openconnect.REMOTE_API"
             android:name=".api.GrantPermissionsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
-            android:permission="app.openconnect.REMOTE_API"
             android:name=".api.ConfirmDialog" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

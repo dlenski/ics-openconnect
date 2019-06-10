@@ -24,17 +24,14 @@
  */
 
 package app.openconnect.fragments;
-import java.io.File;
-import java.util.Map;
-
 import android.Manifest.permission;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -42,13 +39,17 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import app.openconnect.R;
+import app.openconnect.api.ConfirmDialog;
 import app.openconnect.api.ExternalAppDatabase;
 import app.openconnect.core.DeviceStateReceiver;
+
+import java.io.File;
+import java.util.Map;
 
 public class GeneralSettings extends PreferenceFragment
 		implements OnPreferenceClickListener, OnClickListener, OnSharedPreferenceChangeListener {
@@ -87,11 +88,9 @@ public class GeneralSettings extends PreferenceFragment
             this.onSharedPreferenceChanged(sp, entry.getKey());
         }
 
-		/*
 		Preference clearapi = findPreference("clearapi");
 		clearapi.setOnPreferenceClickListener(this);
 		setClearApiSummary();
-		*/
 	}
 
     @Override
@@ -137,12 +136,16 @@ public class GeneralSettings extends PreferenceFragment
 		String applist=null;
 		for (String packagename : mExtapp.getExtAppList()) {
 			try {
-				app = pm.getApplicationInfo(packagename, 0);
-				if (applist==null)
-					applist = "";
-				else
-					applist += delim;
-				applist+=app.loadLabel(pm);
+                if (applist==null)
+                    applist = "";
+                else
+                    applist += delim;
+			    if(ConfirmDialog.ANONYMOUS_PACKAGE.equals(packagename)) {
+                    applist+=getString(R.string.anonymous_app);
+                }else{
+                    app = pm.getApplicationInfo(packagename, 0);
+                    applist+=app.loadLabel(pm);
+                }
 
 			} catch (NameNotFoundException e) {
 				// App not found. Remove it from the list

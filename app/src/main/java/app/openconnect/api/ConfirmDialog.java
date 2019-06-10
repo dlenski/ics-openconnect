@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnShowListener;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
@@ -35,6 +36,8 @@ import app.openconnect.R;
 public class ConfirmDialog extends Activity implements
 CompoundButton.OnCheckedChangeListener, DialogInterface.OnClickListener {
 	private static final String TAG = "OpenVPNVpnConfirm";
+    public static final String EXTRA_PACKAGE_NAME = "android.intent.extra.PACKAGE_NAME";
+    public static final String ANONYMOUS_PACKAGE = "app.openconnect.ANONYMOUS_PACKAGE";
 
 	private String mPackage;
 
@@ -46,20 +49,29 @@ CompoundButton.OnCheckedChangeListener, DialogInterface.OnClickListener {
 	protected void onResume() {
 		super.onResume();
 		try {
-			mPackage = getCallingPackage();
-			if (mPackage==null) {
-				finish();
-				return;
-			}
-				
+            Intent intent = getIntent();
+            if (intent.getStringExtra(EXTRA_PACKAGE_NAME) != null) {
+                mPackage = intent.getStringExtra(EXTRA_PACKAGE_NAME);
+            } else {
+                mPackage = getCallingPackage();
+                if (mPackage==null) {
+                    finish();
+                    return;
+                }
+            }
 
-			PackageManager pm = getPackageManager();
-			ApplicationInfo app = pm.getApplicationInfo(mPackage, 0);
+            View view = View.inflate(this, R.layout.api_confirm, null);
+            CharSequence appString;
+            if (mPackage.equals(ANONYMOUS_PACKAGE)) {
+                appString = getString(R.string.anonymous_app_prompt, getString(R.string.app));
+            } else {
+                PackageManager pm = getPackageManager();
+                ApplicationInfo app = pm.getApplicationInfo(mPackage, 0);
+                appString = getString(R.string.prompt, app.loadLabel(pm), getString(R.string.app));
+                ((ImageView) view.findViewById(R.id.icon)).setImageDrawable(app.loadIcon(pm));
+            }
 
-			View view = View.inflate(this, R.layout.api_confirm, null);
-			((ImageView) view.findViewById(R.id.icon)).setImageDrawable(app.loadIcon(pm));
-			((TextView) view.findViewById(R.id.prompt)).setText(
-					getString(R.string.prompt, app.loadLabel(pm), getString(R.string.app)));
+			((TextView) view.findViewById(R.id.prompt)).setText(appString);
 			((CompoundButton) view.findViewById(R.id.check)).setOnCheckedChangeListener(this);
 
 

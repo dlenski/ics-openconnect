@@ -119,12 +119,15 @@
     <string name="remote_trust">I trust this application.</string>
     <string name="no_external_app_allowed">No app allowed to use external API</string>
     <string name="allowed_apps">Allowed apps: %s</string>
+    <string name="anonymous_app">Anonymous App</string>
     <string name="clearappsdialog">Clear list of allowed external apps?\nCurrent list of allowed apps:\n\n%s</string>
     <string name="screenoff_summary">Pause the connection when the screen is off, to save battery life.</string>
     <string name="screenoff_title">Pause when asleep</string>
     <string name="save_password">Save Password</string>
     <string name="device_specific">Device-specific Hacks</string>
     <string name="cannotparsecert">Cannot display certificate information</string>
+    <string name="appbehaviour">APP behavior</string>
+	<string name="anonymous_app_prompt">An external app tries to control %s. The app requesting access cannot be determined. Allowing this app grants ANONYMOUS app access.</string>
     <string name="vpnbehaviour">VPN behavior</string>
     <string name="allow_vpn_changes">Allow changes to VPN Profiles</string>
     <!-- OpenConnect preference strings -->
