@@ -1,4 +1,4 @@
-NDK := /opt/android-sdk-linux_x86/android-ndk-r16b
+NDK := /opt/android-ndk
 
 JAR_DIR := ../app/libs
 JNI_DIR := ../app/src/main/jniLibs
@@ -10,19 +10,19 @@ ARCH_LIST := arm arm64 x86 x86_64
 # openconnect/android/Makefile
 NDK_ARCH_arm := armeabi
 TRIPLET_arm := arm-linux-androideabi
-CFLAGS_arm := -mthumb -Os -D__ANDROID_API__=14
+CFLAGS_arm := -mthumb -Os -D__ANDROID_API__=23
 
 NDK_ARCH_arm64 := arm64-v8a
 TRIPLET_arm64 := aarch64-linux-android
-CFLAGS_arm64 := -Os -D__ANDROID_API__=26
+CFLAGS_arm64 := -Os -D__ANDROID_API__=23
 
 NDK_ARCH_x86 := x86
 TRIPLET_x86 := i686-linux-android
-CFLAGS_x86 := -Os -D__ANDROID_API__=14
+CFLAGS_x86 := -Os -D__ANDROID_API__=23
 
 NDK_ARCH_x86_64 := x86_64
 TRIPLET_x86_64 := x86_64-linux-android
-CFLAGS_x86_64 := -Os -D__ANDROID_API__=21
+CFLAGS_x86_64 := -Os -D__ANDROID_API__=23
 
 JAR_LIST := openconnect-wrapper.jar stoken-wrapper.jar
 PKG_LIST := curl
@@ -37,7 +37,7 @@ ARCH_TOOLCHAIN_TARGETS := $(addsuffix /toolchain/.installed,$(ARCH_LIST))
 INSTALL_ARCH_TARGETS := $(addprefix install-arch-,$(ARCH_LIST))
 INSTALL_JAR_TARGETS := $(addprefix install-jar-,$(JAR_LIST))
 
-CURL_VER := 7.58.0
+CURL_VER := 7.69.1
 
 TOPDIR := $(shell pwd)
 
@@ -102,7 +102,7 @@ $(ARCH_STOKEN_TARGETS) : %/libstoken.so : %/toolchain/.installed stoken/configur
 			--enable-jni-standalone \
 			CFLAGS="$(CFLAGS_$*)" LDFLAGS="-Wl,--strip-debug"
 	$(call set_build_env,$*) $(MAKE) -C $*/build-stoken
-	$(call set_build_env,$*) $(MAKE) -C $*/build-stoken install-strip \
+	$(call set_build_env,$*) $(MAKE) -C $*/build-stoken install \
 		DESTDIR=$(TOPDIR)/$*/out
 	cp -L $*/out/lib/libstoken.so $*/
 
