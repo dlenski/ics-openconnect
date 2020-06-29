@@ -14,7 +14,7 @@ CFLAGS_arm := -mthumb -Os -D__ANDROID_API__=23
 
 NDK_ARCH_arm64 := arm64-v8a
 TRIPLET_arm64 := aarch64-linux-android
-CFLAGS_arm64 := -Os -D__ANDROID_API__=23
+CFLAGS_arm64 := -Os -D__ANDROID_API__=26
 
 NDK_ARCH_x86 := x86
 TRIPLET_x86 := i686-linux-android
@@ -37,7 +37,7 @@ ARCH_TOOLCHAIN_TARGETS := $(addsuffix /toolchain/.installed,$(ARCH_LIST))
 INSTALL_ARCH_TARGETS := $(addprefix install-arch-,$(ARCH_LIST))
 INSTALL_JAR_TARGETS := $(addprefix install-jar-,$(JAR_LIST))
 
-CURL_VER := 7.69.1
+CURL_VER := 7.71.0
 
 TOPDIR := $(shell pwd)
 

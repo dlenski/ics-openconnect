@@ -6,7 +6,7 @@ android {
         applicationId "app.openconnect"
         minSdkVersion 23
         targetSdkVersion 29
-        ndkVersion "21.0.6113669"
+        ndkVersion "21.3.6528147"
         versionCode 1119
         versionName "1.11+multi"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
