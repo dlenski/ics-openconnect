@@ -4,7 +4,7 @@ JAR_DIR := ../app/libs
 JNI_DIR := ../app/src/main/jniLibs
 BIN_DIR := ../app/src/main/assets/raw
 
-ARCH_LIST := arm arm64 x86 x86_64
+ARCH_LIST := arm64 
 
 # The __ANDROID_API__ version needs to stay in sync with
 # openconnect/android/Makefile
@@ -100,7 +100,7 @@ $(ARCH_STOKEN_TARGETS) : %/libstoken.so : %/toolchain/.installed stoken/configur
 			--enable-shared --without-gtk \
 			--with-java=$(call get_sysroot,$*)/include \
 			--enable-jni-standalone \
-			CFLAGS="$(CFLAGS_$*)" LDFLAGS="-Wl,--strip-debug"
+			CFLAGS="$(CFLAGS_$*) -fuse-ld=gold" LDFLAGS="-Wl,--strip-debug"
 	$(call set_build_env,$*) $(MAKE) -C $*/build-stoken
 	$(call set_build_env,$*) $(MAKE) -C $*/build-stoken install \
 		DESTDIR=$(TOPDIR)/$*/out
