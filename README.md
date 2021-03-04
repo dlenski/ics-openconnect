@@ -8,6 +8,9 @@ XDA thread: [comment](https://forum.xda-developers.com/showthread.php?p=77318683
 OpenConnect for Android
 =======================
 
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![Build Status](https://travis-ci.org/cernekee/ics-openconnect.svg?branch=master)](https://travis-ci.org/cernekee/ics-openconnect)
+
 This is a VPN client for Android, based on the Linux build of
 [OpenConnect](http://www.infradead.org/openconnect/).
 
