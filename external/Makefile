@@ -4,7 +4,7 @@ JAR_DIR := ../app/libs
 JNI_DIR := ../app/src/main/jniLibs
 BIN_DIR := ../app/src/main/assets/raw
 
-ARCH_LIST := arm64 
+ARCH_LIST := arm arm64 x86 x86_64 
 
 # The __ANDROID_API__ version needs to stay in sync with
 # openconnect/android/Makefile
