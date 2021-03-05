@@ -65,6 +65,9 @@ components and copy them into the appropriate library and asset directories:
     cd ics-openconnect
     git submodule init
     git submodule update
+    cd external/openconnect
+    git checkout master
+    git submodule update --init
     make -C external
 
 This procedure only runs on a Linux PC.  If you are unable to build from
