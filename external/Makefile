@@ -37,7 +37,7 @@ ARCH_TOOLCHAIN_TARGETS := $(addsuffix /toolchain/.installed,$(ARCH_LIST))
 INSTALL_ARCH_TARGETS := $(addprefix install-arch-,$(ARCH_LIST))
 INSTALL_JAR_TARGETS := $(addprefix install-jar-,$(JAR_LIST))
 
-CURL_VER := 7.58.0
+CURL_VER := 7.75.0
 
 TOPDIR := $(shell pwd)
 
